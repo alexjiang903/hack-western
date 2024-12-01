@@ -13,7 +13,7 @@
     data() {
       return {
         isRecording: false,
-        audioBlob: null,
+        audioBlob: null, //audio recorded during conversation
         transcription: "",
         processing: false,
         mediaRecorder: null,
@@ -55,9 +55,12 @@
         this.processing = true;
   
         const audioBlob = new Blob(this.chunks, { type: "audio/wav" });
+        console.log("audio blob", audioBlob);
+
         const formData = new FormData();
-        formData.append("audio_file", audioBlob);
-  
+
+        formData.append("audio_file", audioBlob); //problematic code, cannot append audio file to form data
+        
         try {
           const response = await axios.post("http://localhost:9000/asr", formData, {
             headers: { "Content-Type": "multipart/form-data" },
