@@ -2,7 +2,6 @@
 import { ref, computed } from 'vue'
 import Translation from './components/Translations.vue'
 import Transcript from './Transcript.vue'
-import NotFound from './components/NotFound.vue'
 
 // I got this from: https://vuejs.org/guide/scaling-up/routing#simple-routing-from-scratch
 // Import *.vue components here, acts as root of application. (skeleton)
