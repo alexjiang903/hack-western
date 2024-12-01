@@ -1,14 +1,35 @@
-# app.py
-
-from flask import Flask
-
 app = Flask(__name__)
 
-@app.route('/')
+tasks = []
 
-def hello():
+@app.route('/api/tasks', methods=['GET'])
 
-    return 'Hello from Flask!'
+def get_tasks():
 
-if __name__ == "__main__":
-    app.run()
+    return jsonify(tasks)
+
+@app.route('/api/tasks', methods=['POST'])
+
+def add_task():
+
+    data = request.get_json()
+
+    task = data.get('task', '')
+
+    tasks.append(task)
+
+    return jsonify({'message': 'Task added successfully!'})
+
+@app.route('/api/tasks/<int:index>', methods=['DELETE'])
+
+def remove_task(index):
+
+    if 0 <= index < len(tasks):
+
+        del tasks[index]
+
+        return jsonify({'message': 'Task removed successfully!'})
+
+    else:
+
+        return jsonify({'error': 'Invalid index!'}), 400
