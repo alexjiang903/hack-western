@@ -33,6 +33,10 @@
 
         methods() {
             // all methods 
+            // get the text to display on screen, pass it to backend
+            
+
+            
 
         }
         

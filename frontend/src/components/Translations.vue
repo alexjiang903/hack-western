@@ -1,5 +1,5 @@
 <template>
-    <p>sksjkskskskerere</p>
+    <p>placeholder text (Translation template)</p>
 </template>
 
 
