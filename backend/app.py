@@ -55,4 +55,4 @@ def test_endpont():
     return "Server is running"
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="localhost", port=9000)
