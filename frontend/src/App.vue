@@ -1,32 +1,39 @@
+<script setup>
+import { ref, computed } from 'vue'
+import Translation from './components/Translations.vue'
+import Transcript from './Transcript.vue'
+import NotFound from './components/NotFound.vue'
+
+// I got this from: https://vuejs.org/guide/scaling-up/routing#simple-routing-from-scratch
+// Import *.vue components here, acts as root of application. (skeleton)
+
+const routes = {
+  '/': Translation,
+  '/Transcript': Transcript
+}
+
+
+const currentPath = ref(window.location.hash.slice(1) || '/')
+
+window.addEventListener('hashchange', () => {
+  currentPath.value = window.location.hash.slice(1) || '/'
+})
+
+const currentView = computed(() => {
+  return routes[currentPath.value] || NotFound
+})
+</script>
+
 <template>
-  <div id="app">
-    <button @click="callApi">Call API</button>
-    <p>{{ result }}</p>
+  <div class="min-h-screen flex flex-col items-center justify-center bg-gray-50">
+    <component :is="currentView" />
   </div>
 </template>
 
-<script>
-import axios from 'axios';
-
-export default {
-  data() {
-    return {
-      result: ''
-    };
-  },
-  methods: {
-    async callApi() {
-      try {
-        const response = await axios.get('http://127.0.0.1:5000/api/vfFunction');
-        this.result = response.data.result;  // Store the result in a data property
-      } catch (error) {
-        console.error("There was an error calling the API", error);
-      }
-    }
-  }
-};
-</script>
-
 <style>
-/* Your styles here */
+.inline-link {
+  display: inline-block;
+  margin-right: 10px;
+}
+
 </style>

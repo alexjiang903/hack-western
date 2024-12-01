@@ -1,0 +1,6 @@
+/src/
+/vscode/
+/node_modules/
+.vite
+
+!.vite/deps/package.json
