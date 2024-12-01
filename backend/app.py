@@ -54,5 +54,17 @@ def handle_interaction():
 def test_endpont(): 
     return "Server is running"
 
+@app.route('/asr', methods=['POST'])
+def asr():
+    # Access the uploaded file
+    audio_file = request.files.get('audio_file')
+    if not audio_file:
+        return jsonify({'error': 'No file uploaded'}), 400
+
+    # Call your transcription function (assuming it works with the uploaded file)
+    transcript = transcribe_audio(audio_file)
+
+    return jsonify({'transcript': transcript})
+
 if __name__ == '__main__':
     app.run(host="localhost", port=9000)
