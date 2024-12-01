@@ -56,15 +56,13 @@ def test_endpont():
 
 @app.route('/asr', methods=['POST'])
 def asr():
-    # Access the uploaded file
     audio_file = request.files.get('audio_file')
     if not audio_file:
-        return jsonify({'error': 'No file uploaded'}), 400
+        return {"error": "Audio file not found"}, 400
+    # print(f"Received file: {audio_file.filename} of type {audio_file.content_type}")
+    # transcript = transcribe_audio(audio_file)
+    return {"transcript": "Audio file received successfully"}, 200
 
-    # Call your transcription function (assuming it works with the uploaded file)
-    transcript = transcribe_audio(audio_file)
-
-    return jsonify({'transcript': transcript})
 
 if __name__ == '__main__':
     app.run(host="localhost", port=9000)

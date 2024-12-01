@@ -59,8 +59,9 @@
 
         const formData = new FormData();
 
-        formData.append("audio_file", audioBlob); //problematic code, cannot append audio file to form data
-        
+        const audioFile = new File([audioBlob], "audio.wav", { type: "audio/wav" });
+        formData.append("audio_file", audioFile);
+
         try {
           const response = await axios.post("http://localhost:9000/asr", formData, {
             headers: { "Content-Type": "multipart/form-data" },
