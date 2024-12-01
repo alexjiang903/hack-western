@@ -2,14 +2,17 @@
 import { ref, computed } from 'vue'
 import Translation from './components/Translations.vue'
 import Transcript from './Transcript.vue'
-import NotFound from './components/NotFound.vue'
+// import NotFound from './components/NotFound.vue' (create error screen later)
+import AudioRecord from './AudioRecord.vue'
 
 // I got this from: https://vuejs.org/guide/scaling-up/routing#simple-routing-from-scratch
 // Import *.vue components here, acts as root of application. (skeleton)
 
 const routes = {
   '/': Translation,
-  '/Transcript': Transcript
+  '/Transcript': Transcript,
+  "/AudioRecord": AudioRecord
+  
 }
 
 
@@ -20,13 +23,15 @@ window.addEventListener('hashchange', () => {
 })
 
 const currentView = computed(() => {
-  return routes[currentPath.value] || NotFound
+  return routes[currentPath.value]
 })
 </script>
 
 <template>
   <div class="min-h-screen flex flex-col items-center justify-center bg-gray-50">
-    <component :is="currentView" />
+    <Transcript />
+    <Translation/>
+    <AudioRecord/>
   </div>
 </template>
 
