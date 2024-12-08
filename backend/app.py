@@ -8,6 +8,8 @@ from dotenv import load_dotenv, find_dotenv
 from pathlib import Path
 load_dotenv(Path(".env"))
 
+import whisper
+
 app = Flask(__name__)
 CORS(app)
 
@@ -61,8 +63,10 @@ def asr():
         return {"error": "Audio file not found"}, 400
     # print(f"Received file: {audio_file.filename} of type {audio_file.content_type}")
     # transcript = transcribe_audio(audio_file)
+
     return {"transcript": "Audio file received successfully"}, 200
 
 
 if __name__ == '__main__':
     app.run(host="localhost", port=9000)
+
